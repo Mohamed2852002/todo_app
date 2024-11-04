@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/style/constants.dart';
+import 'package:todo_app/style/firebase_auth_codes.dart';
 import 'package:todo_app/style/reusable_components/custom_button.dart';
 import 'package:todo_app/style/reusable_components/custom_text_field.dart';
-import 'package:todo_app/ui/register_screen/register_screen.dart';
+import 'package:todo_app/ui/home/home_screen.dart';
+import 'package:todo_app/ui/register/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -67,6 +70,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 14.h),
                 CustomTextField(
                   keyboardType: TextInputType.visiblePassword,
+                  isPassword: true,
                   label: 'Password',
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -85,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                 CustomButton(
                   text: 'Login',
                   onClick: () {
-                    login();
+                    login(context);
                   },
                 ),
                 SizedBox(height: 20.h),
@@ -107,9 +111,28 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  login() {
+  login(BuildContext context) async {
     if (formKey.currentState?.validate() == true) {
-      // some codes here
+      try {
+        final credential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+                email: emailController.text.trim(),
+                password: passwordController.text);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomeScreen(),
+            ));
+      } on FirebaseAuthException catch (e) {
+        if (e.code == FirebaseAuthCodes.userNotFound) {
+          print('No user found for that email.');
+        } else if (e.code == FirebaseAuthCodes.wrongPassword ||
+            e.code == 'invalid-credential') {
+          print('Wrong password provided for that user.');
+        } else {
+          print('An unexpected error occurred: $e');
+        }
+      }
     }
   }
 }

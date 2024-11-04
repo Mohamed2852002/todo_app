@@ -4,9 +4,16 @@ import 'package:todo_app/style/app_colors.dart';
 
 class AppThemes {
   static ThemeData lightTheme = ThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      elevation: 0,
+      enableFeedback: false,
+      showUnselectedLabels: false,
+      showSelectedLabels: false,
+    ),
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColors.lightPrimaryColor,
       primary: AppColors.lightPrimaryColor,
+      secondary: AppColors.backgroundLightColor,
     ),
     inputDecorationTheme: InputDecorationTheme(
       labelStyle: TextStyle(
@@ -15,8 +22,15 @@ class AppThemes {
       ),
     ),
     scaffoldBackgroundColor: AppColors.backgroundLightColor,
-    appBarTheme: const AppBarTheme(
-      iconTheme: IconThemeData(
+    appBarTheme: AppBarTheme(
+      titleSpacing: 50.w,
+      toolbarHeight: 150.h,
+      titleTextStyle: TextStyle(
+        fontSize: 22.sp,
+        fontWeight: FontWeight.w700,
+        color: Colors.white,
+      ),
+      iconTheme: const IconThemeData(
         color: Colors.white,
       ),
       backgroundColor: AppColors.lightPrimaryColor,
