@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_app/ui/home/screens/settings_screen/settings_screen.dart';
+import 'package:todo_app/ui/home/screens/tasks_screen/tasks_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,10 +12,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentPage = 0;
+  PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 50.w,
+        toolbarHeight: 150.h,
         title: const Text('To Do List'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -51,6 +56,11 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: currentPage,
         onTap: (value) {
           currentPage = value;
+          pageController.animateToPage(
+            currentPage,
+            duration: const Duration(microseconds: 1000),
+            curve: Curves.linear,
+          );
           setState(() {});
         },
         items: [
@@ -68,6 +78,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             label: '',
           ),
+        ],
+      ),
+      body: PageView(
+        controller: pageController,
+        onPageChanged: (value) {
+          currentPage = value;
+          setState(() {});
+        },
+        children: const [
+          TasksScreen(),
+          SettingsScreen(),
         ],
       ),
     );

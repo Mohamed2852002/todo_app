@@ -8,13 +8,16 @@ class CustomTextField extends StatefulWidget {
     required this.label,
     required this.keyboardType,
     this.isPassword = false,
-    required this.validator, required this.controller,
+    this.maxLength,
+    required this.validator,
+    required this.controller,
   });
   final String label;
   final TextInputType keyboardType;
   bool isPassword;
   final String? Function(String?) validator;
   final TextEditingController controller;
+  final int? maxLength;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -24,6 +27,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLength: widget.maxLength,
       controller: widget.controller,
       validator: widget.validator,
       obscureText: widget.isPassword,
@@ -33,6 +37,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         fontSize: 18.sp,
       ),
       decoration: InputDecoration(
+        counterText: '',
         suffixIcon: widget.keyboardType == TextInputType.visiblePassword
             ? IconButton(
                 onPressed: () {
