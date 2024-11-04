@@ -18,13 +18,11 @@ class AppThemes {
     inputDecorationTheme: InputDecorationTheme(
       labelStyle: TextStyle(
         color: Colors.black,
-        fontSize: 12.sp,
+        fontSize: 14.sp,
       ),
     ),
     scaffoldBackgroundColor: AppColors.backgroundLightColor,
     appBarTheme: AppBarTheme(
-      titleSpacing: 50.w,
-      toolbarHeight: 150.h,
       titleTextStyle: TextStyle(
         fontSize: 22.sp,
         fontWeight: FontWeight.w700,
