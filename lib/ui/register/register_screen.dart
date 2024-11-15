@@ -15,6 +15,7 @@ import 'package:todo_app/ui/home/home_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
+  static const String routeName = 'register';
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -187,13 +188,19 @@ class RegisterScreen extends StatelessWidget {
           Navigator.pop(context);
           showDialog(
               context: context,
-              builder: (context) => const CustomMessageDialog(
+              builder: (context) => CustomMessageDialog(
+                  positiveBtnPressed: () {
+                    Navigator.pop(context);
+                  },
                   message: 'The password provided is too weak.'));
         } else if (e.code == FirebaseAuthCodes.existEmail) {
           Navigator.pop(context);
           showDialog(
               context: context,
-              builder: (context) => const CustomMessageDialog(
+              builder: (context) => CustomMessageDialog(
+                  positiveBtnPressed: () {
+                    Navigator.pop(context);
+                  },
                   message: 'The account already exists for that email.'));
         }
       } catch (e) {
@@ -201,6 +208,9 @@ class RegisterScreen extends StatelessWidget {
         showDialog(
             context: context,
             builder: (context) => CustomMessageDialog(
+                positiveBtnPressed: () {
+                  Navigator.pop(context);
+                },
                 message: 'An unexpected error occurred: $e'));
       }
     }
