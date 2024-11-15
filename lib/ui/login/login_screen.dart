@@ -16,6 +16,7 @@ import 'package:todo_app/ui/register/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
+  static const String routeName = 'login';
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -127,10 +128,12 @@ class LoginScreen extends StatelessWidget {
         showDialog(
             context: context,
             builder: (context) => const CustomLoadingDialog());
-        final credential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(
-                email: emailController.text.trim(),
-                password: passwordController.text);
+        final credential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text,
+        );
+        FirebaseAuth.instance.currentUser;
         myuser.User? user =
             await FirestoreHandler.readUser(credential.user!.uid);
         Navigator.pop(context);
@@ -145,19 +148,29 @@ class LoginScreen extends StatelessWidget {
           Navigator.pop(context);
           showDialog(
               context: context,
-              builder: (context) => const CustomMessageDialog(
-                  message: 'No user found for that email.'));
+              builder: (context) => CustomMessageDialog(
+                    message: 'No user found for that email.',
+                    positiveBtnPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ));
         } else if (e.code == FirebaseAuthCodes.wrongPassword) {
           Navigator.pop(context);
           showDialog(
               context: context,
-              builder: (context) => const CustomMessageDialog(
+              builder: (context) => CustomMessageDialog(
+                  positiveBtnPressed: () {
+                    Navigator.pop(context);
+                  },
                   message: 'Wrong password provided for that user.'));
         } else {
           Navigator.pop(context);
           showDialog(
               context: context,
               builder: (context) => CustomMessageDialog(
+                  positiveBtnPressed: () {
+                    Navigator.pop(context);
+                  },
                   message: 'An unexpected error occurred: $e'));
         }
       }
