@@ -71,7 +71,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                   width: 350.w,
                   height: 620.h,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.circular(15.r),
                   ),
                   child: isLoading
@@ -111,6 +111,8 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                   style: TextStyle(
                                     fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary,
                                   ),
                                 ),
                                 const Spacer(),
@@ -128,10 +130,13 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                     widget.task.isDone = true;
                                     setState(() {});
                                   },
-                                  child: const Text(
+                                  child: Text(
                                     'Yes',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .tertiary,
                                     ),
                                   ),
                                 ),
@@ -149,10 +154,13 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                     widget.task.isDone = false;
                                     setState(() {});
                                   },
-                                  child: const Text(
+                                  child: Text(
                                     'No',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .tertiary,
                                     ),
                                   ),
                                 ),
@@ -171,23 +179,35 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                               child: Container(
                                 padding: EdgeInsets.all(16.r),
                                 decoration: BoxDecoration(
-                                    border: Border.all(),
+                                    border: Border.all(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .tertiary,
+                                    ),
                                     borderRadius: BorderRadius.circular(10.r)),
-                                child: Text(selectedDate != null
-                                    ? DateFormat.yMEd()
-                                        .format(selectedDate!)
-                                        .toString()
-                                    : DateFormat.yMEd()
-                                        .format(DateTime.now())
-                                        .toString()),
+                                child: Text(
+                                  selectedDate != null
+                                      ? DateFormat.yMEd()
+                                          .format(selectedDate!)
+                                          .toString()
+                                      : DateFormat.yMEd()
+                                          .format(DateTime.now())
+                                          .toString(),
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary,
+                                  ),
+                                ),
                               ),
                             ),
                             const RSizedBox(height: 90),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  padding: REdgeInsets.symmetric(
-                                      vertical: 16, horizontal: 65),
-                                  backgroundColor: Theme.of(context).colorScheme.primary,),
+                                padding: REdgeInsets.symmetric(
+                                    vertical: 16, horizontal: 65),
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.primary,
+                              ),
                               onPressed: () {
                                 updateTask(
                                   {

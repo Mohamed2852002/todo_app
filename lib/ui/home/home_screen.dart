@@ -23,12 +23,13 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         shape: CircleBorder(
           side: BorderSide(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.secondary,
             width: 4.w,
           ),
         ),
         onPressed: () {
           showModalBottomSheet(
+            backgroundColor: Theme.of(context).colorScheme.secondary,
             isScrollControlled: true,
             context: context,
             builder: (context) => const TaskBottomSheet(),
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.secondary,
         notchMargin: 16.r,
         shape: const CircularNotchedRectangle(),
         child: NavigationBar(

@@ -73,7 +73,7 @@ class FirestoreHandler {
   }
 
   static Stream<List<Task>> getAllTasks(String userId) async* {
-    var taskCollection = getTaskCollection(userId);
+    var taskCollection = getTaskCollection(userId).orderBy('Date');
     var snapshotList = taskCollection.snapshots();
     var tasksList =
         snapshotList.map((event) => event.docs.map((e) => e.data()).toList());
