@@ -33,7 +33,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       obscureText: widget.isPassword,
       keyboardType: widget.keyboardType,
       style: TextStyle(
-        color: Colors.black,
+        color: Theme.of(context).colorScheme.tertiary,
         fontSize: 18.sp,
       ),
       decoration: InputDecoration(
@@ -51,6 +51,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               )
             : null,
         labelText: widget.label,
+        labelStyle: Theme.of(context).textTheme.labelSmall,
       ),
     );
   }

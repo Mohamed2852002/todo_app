@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app/firestore/firestore_handler.dart';
 import 'package:todo_app/firestore/models/task.dart';
 import 'package:todo_app/style/app_colors.dart';
@@ -53,11 +54,11 @@ class TaskWidget extends StatelessWidget {
           height: 115.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.r),
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.secondary,
           ),
           child: Row(
             children: [
-              SizedBox(width: 20.w),
+              const RSizedBox(width: 20),
               Container(
                 width: 4.w,
                 height: 60.h,
@@ -71,9 +72,9 @@ class TaskWidget extends StatelessWidget {
               SizedBox(width: 20.w),
               Expanded(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const RSizedBox(height: 30),
                     Text(
                       task.title ?? '',
                       overflow: TextOverflow.ellipsis,
@@ -89,6 +90,22 @@ class TaskWidget extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
                             fontSize: 14.sp,
+                            color: task.isDone
+                                ? AppColors.finishedTask
+                                : Theme.of(context).colorScheme.primary,
+                          ),
+                    ),
+                    const RSizedBox(height: 10),
+                    Text(
+                      DateFormat.yMMMd().format(
+                        DateTime.fromMillisecondsSinceEpoch(
+                          task.date?.millisecondsSinceEpoch ??
+                              DateTime.now().millisecondsSinceEpoch,
+                        ),
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            fontSize: 11.sp,
                             color: task.isDone
                                 ? AppColors.finishedTask
                                 : Theme.of(context).colorScheme.primary,

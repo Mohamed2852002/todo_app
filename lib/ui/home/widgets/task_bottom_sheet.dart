@@ -95,11 +95,18 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
               child: Container(
                 padding: EdgeInsets.all(16.r),
                 decoration: BoxDecoration(
-                    border: Border.all(),
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
                     borderRadius: BorderRadius.circular(10.r)),
-                child: Text(selectedDate != null
-                    ? DateFormat.yMEd().format(selectedDate!).toString()
-                    : DateFormat.yMEd().format(DateTime.now()).toString()),
+                child: Text(
+                  selectedDate != null
+                      ? DateFormat.yMEd().format(selectedDate!).toString()
+                      : DateFormat.yMEd().format(DateTime.now()).toString(),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.tertiary,
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 20.h),
@@ -130,6 +137,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
   DateTime? selectedDate;
   showTaskDate() async {
     var date = await showDatePicker(
+      
       context: context,
       initialDate: selectedDate ?? DateTime.now(),
       firstDate: DateTime.now(),

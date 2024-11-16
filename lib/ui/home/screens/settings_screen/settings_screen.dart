@@ -2,7 +2,9 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_app/cubits/theme_cubit/theme_cubit.dart';
 import 'package:todo_app/ui/home/screens/all_tasks_screen.dart/all_tasks_screen.dart';
 import 'package:todo_app/ui/login/login_screen.dart';
 
@@ -15,7 +17,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   String currentLanguage = 'English';
-  bool isDark = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -47,9 +49,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Text(
                 'Language',
                 style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16.sp,
-                    fontFamily: 'Poppins'),
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16.sp,
+                  fontFamily: 'Poppins',
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
               ),
               const RSizedBox(height: 20),
               Container(
@@ -90,16 +94,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Text(
                     'Mode',
                     style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16.sp,
-                        fontFamily: 'Poppins'),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16.sp,
+                      fontFamily: 'Poppins',
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
                   ),
                   const Spacer(),
                   Text(
                     'Light',
                     style: TextStyle(
-                        color: isDark
-                            ? Colors.black
+                        color: BlocProvider.of<ThemeCubit>(context).isDark
+                            ? Colors.white
                             : Theme.of(context).colorScheme.primary,
                         fontWeight: FontWeight.w700,
                         fontSize: 16.sp,
@@ -107,9 +113,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   const RSizedBox(width: 5),
                   Switch(
-                    value: isDark,
+                    value: BlocProvider.of<ThemeCubit>(context).isDark,
                     onChanged: (value) {
-                      isDark = value;
+                      BlocProvider.of<ThemeCubit>(context).isDark = value;
+                      BlocProvider.of<ThemeCubit>(context).changeTheme();
                       setState(() {});
                     },
                   ),
@@ -117,7 +124,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Text(
                     'Dark',
                     style: TextStyle(
-                      color: isDark
+                      color: BlocProvider.of<ThemeCubit>(context).isDark
                           ? Theme.of(context).colorScheme.primary
                           : Colors.black,
                       fontWeight: FontWeight.w700,

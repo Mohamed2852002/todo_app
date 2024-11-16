@@ -15,6 +15,10 @@ class AppThemes {
         fontWeight: FontWeight.w400,
         fontSize: 20.sp,
       ),
+      labelSmall:  TextStyle(
+          fontSize: 12.sp,
+          color: Colors.grey,
+        ),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       elevation: 0,
@@ -26,6 +30,7 @@ class AppThemes {
       seedColor: AppColors.lightPrimary,
       primary: AppColors.lightPrimary,
       secondary: Colors.white,
+      tertiary: Colors.black,
     ),
     inputDecorationTheme: InputDecorationTheme(
       labelStyle: TextStyle(
@@ -53,12 +58,18 @@ class AppThemes {
         fontFamily: 'Poppins',
         fontWeight: FontWeight.w700,
         fontSize: 18.sp,
+        color: Colors.white,
       ),
       titleMedium: TextStyle(
         fontFamily: 'Inter',
         fontWeight: FontWeight.w400,
         fontSize: 20.sp,
+         color: Colors.white,
       ),
+      labelSmall:  TextStyle(
+          fontSize: 12.sp,
+          color: Colors.white,
+        ),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       elevation: 0,
@@ -70,6 +81,7 @@ class AppThemes {
       seedColor: AppColors.lightPrimary,
       primary: AppColors.lightPrimary,
       secondary: AppColors.darkSecondary,
+      tertiary: Colors.white,
     ),
     inputDecorationTheme: InputDecorationTheme(
       labelStyle: TextStyle(
@@ -77,16 +89,16 @@ class AppThemes {
         fontSize: 14.sp,
       ),
     ),
-    scaffoldBackgroundColor: AppColors.backgroundLight,
+    scaffoldBackgroundColor: AppColors.backgroundDark,
     appBarTheme: AppBarTheme(
       titleTextStyle: TextStyle(
         fontFamily: 'Poppins',
         fontWeight: FontWeight.w700,
         fontSize: 24.sp,
-        color: Colors.white,
+        color: Colors.black,
       ),
       iconTheme: const IconThemeData(
-        color: Colors.white,
+        color: Colors.black,
       ),
       backgroundColor: AppColors.lightPrimary,
     ),

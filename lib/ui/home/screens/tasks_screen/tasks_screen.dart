@@ -58,14 +58,32 @@ class _TasksScreenState extends State<TasksScreen> {
                     width: 60.w,
                     height: 80.h,
                     todayStyle: DayStyle(
+                      dayStrStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                      monthStrStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                      dayNumStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.secondary,
                         borderRadius: BorderRadius.circular(10.r),
                       ),
                     ),
                     inactiveDayStyle: DayStyle(
+                      dayStrStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                      monthStrStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                      dayNumStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.secondary,
                         borderRadius: BorderRadius.circular(10.r),
                       ),
                     ),
@@ -102,7 +120,7 @@ class _TasksScreenState extends State<TasksScreen> {
               }
               List<Task> tasks = snapshot.data ?? [];
               return ListView.separated(
-                padding: REdgeInsets.only(left: 30, right: 30, top: 25),
+                padding: REdgeInsets.symmetric(horizontal: 30, vertical: 25),
                 itemCount: tasks.length,
                 separatorBuilder: (context, index) => SizedBox(height: 20.h),
                 itemBuilder: (context, index) => TaskWidget(task: tasks[index]),
